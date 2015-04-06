@@ -1,0 +1,25 @@
+{
+  "name": "lib.foo",
+  "description": "jQuery.fn",
+  "version": "1.0.1",
+  "main": "lib.foo.js",
+  "scripts": {
+    "test": "node lib.foo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webclown/lib.foo.git"
+  },
+  "keywords": [
+    "jQuery.fn"
+  ],
+  "author": "Keystion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webclown/lib.foo/issues"
+  },
+  "homepage": "https://github.com/webclown/lib.foo",
+  "dependencies": {
+    "jquery": "^2.1.3"
+  }
+}

@@ -1,0 +1,7 @@
+_site/**
+
+test.html
+
+node_modules/
+
+npm-debug.log
