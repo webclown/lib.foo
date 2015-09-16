@@ -53,3 +53,23 @@ Date.prototype.format = function(format) {
     }
     return format;
 }
+// 获取referrer
+function getReferrer() {
+    var referrer = '';
+    
+    try {
+        referrer = window.top.document.referrer;
+    } catch(e) {
+        if(window.parent) {
+            try {
+                referrer = window.parent.document.referrer;
+            } catch(e2) {
+                referrer = '';
+            }
+        }
+    }
+    if(referrer === '') {
+        referrer = document.referrer;
+    }
+    return referrer;
+};
