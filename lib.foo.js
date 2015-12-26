@@ -184,7 +184,7 @@ if (storageSupported && "tweets" in window.sessionStorage) {
     });
 }
 
-
+// js从数组中删除指定值
 Array.prototype.indexOf = function(val) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == val) return i;
