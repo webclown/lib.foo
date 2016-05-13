@@ -201,3 +201,16 @@ Array.prototype.remove = function(val) {
 var _arr = ['a', 'b', 'c'];
 
 _arr.remove('b');  // ['a', 'c']
+
+
+//获取浏览器参数 函数
+//作用：抓取浏览器URL传递的参数 name为参数名称
+//调用实例：http://www.uis.cc/index.html?page=1&active=158   抓取 page = getQueryString('page');
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r !== null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
