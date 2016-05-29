@@ -214,3 +214,21 @@ function getQueryString(name) {
     }
     return null;
 }
+
+
+/**
+ * 组合字符串 zu-he-zi-fu-chuan
+ * @param  {[type]} string zu-he-zi-fu-chuan
+ * @return {[type]}        zuHeZiFuChuan
+ */
+function getCombo (string) {
+    var arr = string.split("-");
+    var len = arr.length;
+    for (var i = 1; i < len; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase()+arr[i].substr(1, arr[i].length-1)
+    }
+    string = arr.join("");
+    return string;
+}
+
+getCombo("zu-he-zi-fu-chuan");
