@@ -232,3 +232,20 @@ function getCombo (string) {
 }
 
 getCombo("zu-he-zi-fu-chuan");
+
+
+/**
+ * 动态修改微信页面title
+ */
+function changeDocumentTitle (argument) {
+    var $body = $('body');
+    document.title = argument;
+    // hack在微信等webview中无法修改document.title的情况
+    var $iframe = $('<iframe style="display:none;" src="/favicon.ico"></iframe>').on('load', function() {
+        setTimeout(function() {
+            $iframe.off('load').remove()
+        }, 0)
+    }).appendTo($body);
+}
+
+changeDocumentTitle("webclown.net");
