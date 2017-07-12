@@ -249,3 +249,6 @@ function changeDocumentTitle (argument) {
 }
 
 changeDocumentTitle("webclown.net");
+
+// 计算两个日期见有多少天
+Math.abs(new Date('2017-02-01').getTime() - new Date('2017-07-31').getTime())/(1000 * 60 * 60 * 24);
