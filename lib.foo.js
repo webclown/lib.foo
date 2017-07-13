@@ -252,3 +252,20 @@ changeDocumentTitle("webclown.net");
 
 // 计算两个日期相差有多少天
 Math.abs(new Date('2017-02-01').getTime() - new Date('2017-07-31').getTime())/(1000 * 60 * 60 * 24);
+
+// 返回指定日期是当年中的第几周
+var getYearWeek = function(data) {
+    /*
+    date1是当前日期
+    date2是当年第一天
+    d是当前日期是今年第多少天
+    用d + 当前年的第一天的周差距的和在除以7就是本年第几周
+    */
+    var _data = new Date(data);
+    var date1 = new Date(_data.getFullYear(), parseInt((_data.getMonth()+1) - 1), _data.getDate()),
+        date2 = new Date(_data.getFullYear(), 0, 1),
+        d = Math.round((date1.valueOf() - date2.valueOf()) / 86400000);
+    return Math.ceil(
+        (d + ((date2.getDay() + 1) - 1)) / 7
+    );
+};
