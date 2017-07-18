@@ -272,6 +272,7 @@ var getYearWeek = function(data) {
 
 // ===========================
 // js如何判断一组数字是否连续
+// https://segmentfault.com/q/1010000002943744
 function arrange(source) {
     var t;
     var ta;
@@ -297,3 +298,62 @@ var arr = [3, 4, 13, 14, 15, 17, 20, 22];
 console.log(arrange(arr));
 
 // ===========================
+
+/**
+ * 合并相同单元格
+ * @Author http://zhsq-java.iteye.com/blog/2021833
+ * @param  {[object]}            tbl      [table对应的dom元素]
+ * @param  {[number]}            beginRow [从第几行开始合并（从0开始）]
+ * @param  {[number]}            endRow   [合并到哪一行，负数表示从底下数几行不合并]
+ * @param  {[array]}             colIdxes [合并的列下标的数组，如[0,1]表示合并前两列，[0]表示只合并第一列]
+ * @return {[type]}                     [description]
+ */
+function mergeSameCell(tbl,beginRow,endRow,colIdxes){  
+    var colIdx = colIdxes[0];  
+    var newColIdxes = colIdxes.concat();  
+    newColIdxes.splice(0,1)  
+    var delRows = new Array();  
+    var rs = tbl.rows;  
+    //endRow为0的时候合并到最后一行，小于0时表示最后有-endRow行不合并  
+    if(endRow === 0){  
+        endRow = rs.length - 1;  
+    }else if(endRow < 0){  
+        endRow = rs.length - 1 + endRow;  
+    }  
+    var rowSpan = 1; //要设置的rowSpan的值  
+    var rowIdx = beginRow; //要设置rowSpan的cell行下标  
+    var cellValue; //存储单元格里面的内容  
+    for(var i=beginRow; i<= endRow + 1; i++){  
+        if(i === endRow + 1){//过了最后一行的时候合并前面的单元格  
+            if(newColIdxes.length > 0){  
+                mergeSameCell(tbl,rowIdx,endRow,newColIdxes);  
+            }  
+            rs[rowIdx].cells[colIdx].rowSpan = rowSpan;
+            rs[rowIdx].cells[colIdx].style.height = rowSpan * 130 + 'px';
+        }else{  
+            var cell = rs[i].cells[colIdx];  
+            if(i === beginRow){//第一行的时候初始化各个参数  
+                cellValue = cell.innerHTML;  
+                rowSpan = 1;  
+                rowIdx = i;  
+            }else if(cellValue != cell.innerHTML){//数据改变合并前面的单元格  
+                cellValue = cell.innerHTML;  
+                if(newColIdxes.length > 0){  
+                    mergeSameCell(tbl,rowIdx,i - 1,newColIdxes);  
+                }  
+                rs[rowIdx].cells[colIdx].rowSpan = rowSpan;
+                rs[rowIdx].cells[colIdx].style.height = rowSpan * 130 + 'px';
+                rowSpan = 1;  
+                rowIdx = i;  
+            }else if(cellValue === cell.innerHTML){//数据和前面的数据重复的时候删除单元格  
+                rowSpan++;  
+                delRows.push(i);  
+            }  
+        }  
+    }  
+    for(var j=0;j<delRows.length; j++){  
+        rs[delRows[j]].deleteCell(colIdx);  
+    }  
+} 
+
+mergeSameCell(document.querySelector('table'), 1, 3, 1);
