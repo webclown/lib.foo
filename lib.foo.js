@@ -269,3 +269,31 @@ var getYearWeek = function(data) {
         (d + ((date2.getDay() + 1) - 1)) / 7
     );
 };
+
+// ===========================
+// js如何判断一组数字是否连续
+function arrange(source) {
+    var t;
+    var ta;
+    var r = [];
+
+    source.forEach(function(v) {
+        console.log(t, v);   // 跟踪调试用
+        if (t === v) {
+            ta.push(t);
+            t++;
+            return;
+        }
+
+        ta = [v];
+        t = v + 1;
+        r.push(ta);
+    });
+
+    return r;
+}
+
+var arr = [3, 4, 13, 14, 15, 17, 20, 22];
+console.log(arrange(arr));
+
+// ===========================
