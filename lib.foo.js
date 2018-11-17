@@ -203,6 +203,31 @@ var _arr = ['a', 'b', 'c'];
 _arr.remove('b');  // ['a', 'c']
 
 
+/*
+ * 删除数组中的某一个对象
+ * _arr:数组
+ * _obj:需删除的对象
+ */
+function removeAaary(_arr, _obj) {
+    var length = _arr.length;
+    for (var i = 0; i < length; i++) {
+        if (_arr[i] == _obj) {
+            if (i == 0) {
+                _arr.shift(); //删除并返回数组的第一个元素
+                return _arr;
+            }
+            else if (i == length - 1) {
+                _arr.pop();  //删除并返回数组的最后一个元素
+                return _arr;
+            }
+            else {
+                _arr.splice(i, 1); //删除下标为i的元素
+                return _arr;
+            }
+        }
+    }
+}
+
 //获取浏览器参数 函数
 //作用：抓取浏览器URL传递的参数 name为参数名称
 //调用实例：http://www.uis.cc/index.html?page=1&active=158   抓取 page = getQueryString('page');
