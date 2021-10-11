@@ -382,3 +382,29 @@ function mergeSameCell(tbl,beginRow,endRow,colIdxes){
 } 
 
 mergeSameCell(document.querySelector('table'), 1, 3, 1);
+
+// ========================
+
+/**
+ * 字符串code换取值
+ * @param {String} strCode 字符串code： '0'、'1, 2, 5'
+ * @param {Object} listMap {0: '张三', 1: '李四'}
+ * @extends i18n 翻译
+ * @returns '张三, 李四'
+ * @example convertCode('1, 3', { 0: '张三', 1: '李四', 2: '王五', 3: '赵六' })
+ *  => '李四, 赵六'
+ */
+export function convertCode(strCode, listMap) {
+  var res = ''
+  if (strCode && listMap) {
+    var strArr = strCode.split(',').map(Number)
+    var arr = []
+    if (!isNaN(strArr[0])) {
+      strArr.forEach(item => {
+        arr.push(listMap[item])
+      })
+      res = arr.join(i18n.t('symbol.comma'))
+    }
+  }
+  return res
+}
